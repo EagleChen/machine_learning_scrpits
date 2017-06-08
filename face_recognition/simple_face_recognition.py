@@ -18,17 +18,16 @@ logging.debug(f'lib imported, takes {current - start} seconds')
 start = current
 
 known_encoding_path = args.known
+known_face_encodings, known_names = [], []
 if os.path.exists(known_encoding_path):
   obj_text = codecs.open(known_encoding_path, 'r', encoding='utf-8').read()
   features = json.loads(obj_text)
-  known_face_encodings, known_names = [], []
   for name, feature in features.items():
    known_face_encodings.append(np.array(feature))
    known_names.append(name)
 else :
   encoding_dict = {}
   known_image_path = os.path.join(pwd, "known")
-  known_face_encodings = []
   for image_name in os.listdir(known_image_path):
     name = image_name[:-5] # remove extention
     imagePath = os.path.join(known_image_path, image_name)
@@ -37,6 +36,7 @@ else :
     encodings = face_recognition.face_encodings(img, face_locations)
     encoding_dict[name] = encodings[0].tolist()
     known_face_encodings.append(encodings[0])
+    known_names.append(name)
 
     if args.loglevel.upper() == logging.DEBUG:
       showImage = cv2.imread(imagePath)

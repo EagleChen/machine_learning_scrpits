@@ -4,7 +4,7 @@
 1. put known images to 'known' directory(during first run). For example, use `jay.jpeg` for jay's photo.
 2. run the script. `known.json` will be created which contains features for persons under `known` folder. This json file path can be changed by specifying `--known` argument. The file can be reused(`known` folder can be removed).
   ```
-  python face_recognition.py --test /tmp/test.jpeg
+  python simple_face_recognition.py --test /tmp/test.jpeg
   ```
 
 Have fun!
